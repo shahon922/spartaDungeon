@@ -5,6 +5,11 @@ namespace spartaDungeon
     internal class Program
     {
         static string name;
+        static int level = 1;
+        static int attack = 10;
+        static int defense = 5;
+        static int hp = 100;
+        static int gold = 1500;
 
         static void Main(string[] args)
         {
@@ -56,12 +61,12 @@ namespace spartaDungeon
             Console.WriteLine("상태 보기");
             Console.WriteLine("캐릭터의 정보가 표시됩니다.");
 
-            Console.WriteLine("Lv. ");
+            Console.WriteLine("Lv. " + "{0:D2}",level);
             Console.WriteLine("Chad : " + name);
-            Console.WriteLine("공격력 : ");
-            Console.WriteLine("방어력 : ");
-            Console.WriteLine("체 력 : ");
-            Console.WriteLine("Gold : " + "G");
+            Console.WriteLine("공격력 : " + attack);
+            Console.WriteLine("방어력 : " + defense);
+            Console.WriteLine("체 력 : " + hp);
+            Console.WriteLine("Gold : " + gold + "G");
 
             Console.WriteLine("0. 나가기");
             int charater_num = int.Parse(Console.ReadLine());
