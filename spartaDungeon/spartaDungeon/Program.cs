@@ -12,20 +12,50 @@ namespace spartaDungeon
         static int defense = 5; 
         static int hp = 100;
         static int gold = 1500;
-        //public List<Item> itemList;
+        static List<Item> itemList;
 
-        class Item
+        public class Player
+        {
+            public void OpenInventory()
+            {
+                int idx = 1;
+                foreach(Item item in itemList)
+                {
+                    Console.WriteLine("{0}. {1} | {2} +{3} | {4}", idx, item.name, item.type, item.value, item.options);
+                    idx++;
+                }
+            }
+        }
+
+        public class store
+        {
+            static void sotreList()
+            {
+                List<Item> itemList = new List<Item>();
+                itemList.Add(new Item("수련자의 갑옷", "방어력", 5, "수련에 도움을 주는 갑옷입니다.", 1000));
+                itemList.Add(new Item("무쇠갑옷", "방어력", 9, "무쇠로 만들어져 튼튼한 갑옷입니다.", 350));
+                itemList.Add(new Item("스파르타의 갑옷", "방어력", 15, "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 3500));
+                itemList.Add(new Item("낡은 검", "공격력", 2, "쉽게 볼 수 있는 낡은 검 입니다.", 600));
+                itemList.Add(new Item("청동 도끼", "공격력", 5, "어디선가 사용됐던거 같은 도끼입니다.", 1500));
+                itemList.Add(new Item("스파르타의 창", "공격력", 7, "스파르타의 전사들이 사용했다는 전설의 창입니다.", 350));
+            }
+        }
+       
+
+        public class Item
         {
             public string name;
             public int count;
+            public string type; //  공격력  방어력
             public int value;
             public string options;
             public int price;
 
-            public Item(string name, int value, string options, int price)
+            public Item(string name, string type, int value, string options, int price)
             {
                 this.name = name;
                 this.count = 1;
+                this.type = type;
                 this.value = value;
                 this.options = options;
                 this.price = price;
@@ -38,22 +68,6 @@ namespace spartaDungeon
                 this.value = item.value;
                 this.options = item.options;
                 this.price = item.price;
-            }
-        }
-
-        class Store
-        {
-            public List<Item> itemList;
-            
-            public Store()
-            {
-                List<Item> itemList = new List<Item>();
-                itemList.Add(new Item("수련자의 갑옷", 5, "수련에 도움을 주는 갑옷입니다.", 1000));
-                itemList.Add(new Item("무쇠갑옷", 9, "무쇠로 만들어져 튼튼한 갑옷입니다.", 350));
-                itemList.Add(new Item("스파르타의 갑옷", 15, "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 3500));
-                itemList.Add(new Item("낡은 검", 2, "쉽게 볼 수 있는 낡은 검 입니다.", 600));
-                itemList.Add(new Item("청동 도끼", 5, "어디선가 사용됐던거 같은 도끼입니다.", 1500));
-                itemList.Add(new Item("스파르타의 창", 7, "스파르타의 전사들이 사용했다는 전설의 창입니다.", 350));
             }
         }
 
@@ -96,7 +110,7 @@ namespace spartaDungeon
             }
             else if (input == 3)
             {
-                store();
+                //store();
             }
             else
             {
@@ -189,7 +203,7 @@ namespace spartaDungeon
             }
         }
 
-        static void store()
+        /*static void store()
         {
             Console.Clear();
             Console.WriteLine("상점");
@@ -198,6 +212,16 @@ namespace spartaDungeon
             Console.WriteLine("[보유 골드]");
             Console.WriteLine("{0} G", gold);
             Console.WriteLine("[아이템 목록]");
+
+            List<Item> itemList = new List<Item>();
+            itemList.Add(new Item("수련자의 갑옷",1, 5, "수련에 도움을 주는 갑옷입니다.", 1000));
+            itemList.Add(new Item("무쇠갑옷",1, 9, "무쇠로 만들어져 튼튼한 갑옷입니다.", 350));
+            itemList.Add(new Item("스파르타의 갑옷",1, 15, "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 3500));
+            itemList.Add(new Item("낡은 검",2, 2, "쉽게 볼 수 있는 낡은 검 입니다.", 600));
+            itemList.Add(new Item("청동 도끼",2, 5, "어디선가 사용됐던거 같은 도끼입니다.", 1500));
+            itemList.Add(new Item("스파르타의 창",2, 7, "스파르타의 전사들이 사용했다는 전설의 창입니다.", 350));
+
+
 
             Console.WriteLine("1. 아이템 구매");
             Console.WriteLine("0. 나가기");
@@ -216,7 +240,7 @@ namespace spartaDungeon
                 Console.WriteLine("잘못된 입력입니다.");
                 Console.ReadLine();
             }
-        }
+        }*/
 
         
     }
