@@ -124,12 +124,12 @@ namespace spartaDungeon
             Console.WriteLine("상태 보기");
             Console.WriteLine("캐릭터의 정보가 표시됩니다.");
 
-            Console.WriteLine("Lv. " + "{0:D2}",level);
-            Console.WriteLine("Chad : " + name + " ( 전사 )");
-            Console.WriteLine("공격력 : " + attack);
-            Console.WriteLine("방어력 : " + defense);
-            Console.WriteLine("체 력 : " + hp);
-            Console.WriteLine("Gold : " + gold + "G");
+            Console.WriteLine("Lv. {0:D2}", level) ;
+            Console.WriteLine("Chad : {0} ( 전사 )", name);
+            Console.WriteLine("공격력 : {0}", attack);
+            Console.WriteLine("방어력 : {0}", defense);
+            Console.WriteLine("체 력 : {0}", hp);
+            Console.WriteLine("Gold : {0} G", gold);
 
             Console.WriteLine("0. 나가기");
 
