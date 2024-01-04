@@ -14,7 +14,7 @@ namespace spartaDungeon
         static int defense = 5; 
         static int hp = 100;
         static int gold = 1500;
-        static int idx = 0;
+        //static int idx = 0;
         static List<Item> itemList = new List<Item>();
         
 
@@ -22,6 +22,7 @@ namespace spartaDungeon
  
         public class Item
         {
+            public int idx;
             public string name;
             public int count;
             public string type; //  공격력  방어력
@@ -29,8 +30,9 @@ namespace spartaDungeon
             public string options;
             public int price;
 
-            public Item(string name, string type, int value, string options, int price)
+            public Item(int idx,string name, string type, int value, string options, int price)
             {
+                this.idx = idx;
                 this.name = name;
                 this.count = 1;
                 this.type = type;
@@ -41,6 +43,7 @@ namespace spartaDungeon
 
             public Item(Item item)
             {
+                this.idx = item.idx;
                 this.name = item.name;
                 count = 1;
                 this.value = item.value;
@@ -56,16 +59,14 @@ namespace spartaDungeon
             Console.Write("이름을 입력하세요 : ");
             name = Console.ReadLine(); 
 
-            for(int i = 1; i <= 1; i++)
-            {
                 //itemList = new List<Item>();
-                itemList.Add(new Item("수련자의 갑옷", "방어력", 5, "수련에 도움을 주는 갑옷입니다.", 1000));
-                itemList.Add(new Item("무쇠갑옷", "방어력", 9, "무쇠로 만들어져 튼튼한 갑옷입니다.", 350));
-                itemList.Add(new Item("스파르타의 갑옷", "방어력", 15, "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 3500));
-                itemList.Add(new Item("낡은 검", "공격력", 2, "쉽게 볼 수 있는 낡은 검 입니다.", 600));
-                itemList.Add(new Item("청동 도끼", "공격력", 5, "어디선가 사용됐던거 같은 도끼입니다.", 1500));
-                itemList.Add(new Item("스파르타의 창", "공격력", 7, "스파르타의 전사들이 사용했다는 전설의 창입니다.", 350));
-            }
+                itemList.Add(new Item(1,"수련자의 갑옷", "방어력", 5, "수련에 도움을 주는 갑옷입니다.", 1000));
+                itemList.Add(new Item(2,"무쇠갑옷", "방어력", 9, "무쇠로 만들어져 튼튼한 갑옷입니다.", 350));
+                itemList.Add(new Item(3,"스파르타의 갑옷", "방어력", 15, "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 3500));
+                itemList.Add(new Item(4,"낡은 검", "공격력", 2, "쉽게 볼 수 있는 낡은 검 입니다.", 600));
+                itemList.Add(new Item(5,"청동 도끼", "공격력", 5, "어디선가 사용됐던거 같은 도끼입니다.", 1500));
+                itemList.Add(new Item(6,"스파르타의 창", "공격력", 7, "스파르타의 전사들이 사용했다는 전설의 창입니다.", 350));
+            
             
             village();
             
@@ -177,7 +178,12 @@ namespace spartaDungeon
             Console.WriteLine("[아이템 목록]");
        
 
-            Console.WriteLine(itemList.Count);
+            // 상점에서 인벤토리로 넘김받음
+            // input으로 받은 번호와 idx의 번호 비교
+            // item.type의 string을 비교해서 능력치 추가
+            // 같으면 [E] 출력 / [E]가 있을 때 누르면 [E] 사라짐
+            // charate에 능력치 추가/해제
+
             Console.WriteLine("0. 나가기");
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -248,15 +254,14 @@ namespace spartaDungeon
             Console.WriteLine("{0} G", gold);
             Console.WriteLine("[아이템 목록]");
 
-            for(idx = 0; idx <= 1; idx++)
-            {
+            
                 foreach (Item item in itemList)
                 {
-                    Console.WriteLine(" - {0}. {1} | {2} +{3} | {4} | {5} G", idx += 1, item.name, item.type, item.value, item.options, item.price);
+                    Console.WriteLine(" - {0}. {1} | {2} +{3} | {4} | {5} G", item.idx, item.name, item.type, item.value, item.options, item.price);
                     
                 }
-            }
-
+            
+            Console.WriteLine("1. 구매");
             Console.WriteLine("0. 나가기");
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -264,11 +269,40 @@ namespace spartaDungeon
 
             int input = int.Parse(Console.ReadLine());
 
-            if (input == idx)
+            if (input == 1)
             {
-                // 구매완료창 출력
-                // 인벤토리로 이동
-                // price가 구매완료로 변경
+
+                Console.WriteLine("구매할 장비의 번호를 입력하세요");
+                Console.Write(">> ");
+
+                int listNum = int.Parse(Console.ReadLine());
+
+                foreach (Item item in itemList)
+                {
+                    if(listNum == item.idx)
+                    {
+                        if (gold < item.price)
+                        {
+                            Console.WriteLine("Gold가 부족합니다.");
+                        }
+                        else
+                        {
+                            // 구매완료창 출력
+                            Console.WriteLine("구매가 완료되었습니다.");
+                            // 갖고 있는 gold에서 item.price만큼 빼기
+                            //gold -= item.price;
+                            // 인벤토리로 이동
+                            // price가 구매완료로 변경
+
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("잘못된 입력입니다.");
+                    }
+
+                }
+
             }
             else if (input == 0)
             {
