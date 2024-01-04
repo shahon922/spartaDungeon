@@ -291,6 +291,7 @@ namespace spartaDungeon
                             // 갖고 있는 gold에서 item.price만큼 빼기
                             gold -= item.price;
                             // 카운트를 0으로 변경
+                            item.count = 0;
                             // 인벤토리로 이동
                             // price가 구매완료로 변경
                             store();
