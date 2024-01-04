@@ -11,15 +11,15 @@ namespace spartaDungeon
         static string name;
         static int level = 1;
         static int attack = 10;
-        static int defense = 5; 
+        static int defense = 5;
         static int hp = 100;
         static int gold = 1500;
         //static int idx = 0;
         static List<Item> itemList = new List<Item>();
-        
 
 
- 
+
+
         public class Item
         {
             public int idx;
@@ -30,7 +30,7 @@ namespace spartaDungeon
             public string options;
             public int price;
 
-            public Item(int idx,string name, string type, int value, string options, int price)
+            public Item(int idx, string name, string type, int value, string options, int price)
             {
                 this.idx = idx;
                 this.name = name;
@@ -51,7 +51,6 @@ namespace spartaDungeon
                 this.price = item.price;
             }
 
-           
         }
 
         static void Main(string[] args)
@@ -254,13 +253,13 @@ namespace spartaDungeon
             Console.WriteLine("{0} G", gold);
             Console.WriteLine("[아이템 목록]");
 
-            
-                foreach (Item item in itemList)
-                {
-                    Console.WriteLine(" - {0}. {1} | {2} +{3} | {4} | {5} G", item.idx, item.name, item.type, item.value, item.options, item.price);
-                    
-                }
-            
+            foreach (Item item in itemList)
+            {
+                Console.WriteLine(" - {0}. {1} | {2} +{3} | {4} | {5} G", item.idx, item.name, item.type, item.value, item.options, item.price);
+
+            }
+
+
             Console.WriteLine("1. 구매");
             Console.WriteLine("0. 나가기");
 
@@ -271,36 +270,49 @@ namespace spartaDungeon
 
             if (input == 1)
             {
-
-                Console.WriteLine("구매할 장비의 번호를 입력하세요");
-                Console.Write(">> ");
-
-                int listNum = int.Parse(Console.ReadLine());
-
                 foreach (Item item in itemList)
                 {
-                    if(listNum == item.idx)
+
+                    Console.WriteLine("구매하고 싶은 번호를 입력하세요");
+                    Console.Write(">> ");
+
+                    int listNum = int.Parse(Console.ReadLine());
+
+                    int num = itemList.FindIndex(a => a.idx == listNum);
+                    //Console.WriteLine(num);
+
+                    if (listNum == (num+1)) // 배열의 수가 0부터 시작이라 1을 더해줌으로 같아질 수 있을 거라 생각했습니다...
                     {
-                        if (gold < item.price)
+                        if (gold >= item.price)
                         {
-                            Console.WriteLine("Gold가 부족합니다.");
-                        }
-                        else
-                        {
+                            Console.WriteLine(item.name);
                             // 구매완료창 출력
                             Console.WriteLine("구매가 완료되었습니다.");
                             // 갖고 있는 gold에서 item.price만큼 빼기
-                            //gold -= item.price;
+                            gold -= item.price;
+                            // 카운트를 0으로 변경
                             // 인벤토리로 이동
                             // price가 구매완료로 변경
-
+                            store();
+                        }
+                        else if (item.count == 0)
+                        {
+                            // 만약 갖고 있는 거라면 구매했었다는 창 출력
+                            Console.WriteLine("이미 구매한 아이템입니다.");
+                            store();
+                        }
+                        else
+                        {
+                            Console.WriteLine(item.name);
+                            Console.WriteLine("Gold가 부족합니다.");
+                            store();
                         }
                     }
                     else
                     {
                         Console.WriteLine("잘못된 입력입니다.");
+                        store();
                     }
-
                 }
 
             }
@@ -311,6 +323,7 @@ namespace spartaDungeon
             else
             {
                 Console.WriteLine("잘못된 입력입니다.");
+                BuyItem();
             }
 
         }
