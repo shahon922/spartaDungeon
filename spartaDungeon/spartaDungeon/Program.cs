@@ -56,17 +56,17 @@ namespace spartaDungeon
         static void Main(string[] args)
         {
             Console.Write("이름을 입력하세요 : ");
-            name = Console.ReadLine(); 
+            name = Console.ReadLine();
 
-                //itemList = new List<Item>();
-                itemList.Add(new Item(1,"수련자의 갑옷", "방어력", 5, "수련에 도움을 주는 갑옷입니다.", 1000));
-                itemList.Add(new Item(2,"무쇠갑옷", "방어력", 9, "무쇠로 만들어져 튼튼한 갑옷입니다.", 350));
-                itemList.Add(new Item(3,"스파르타의 갑옷", "방어력", 15, "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 3500));
-                itemList.Add(new Item(4,"낡은 검", "공격력", 2, "쉽게 볼 수 있는 낡은 검 입니다.", 600));
-                itemList.Add(new Item(5,"청동 도끼", "공격력", 5, "어디선가 사용됐던거 같은 도끼입니다.", 1500));
-                itemList.Add(new Item(6,"스파르타의 창", "공격력", 7, "스파르타의 전사들이 사용했다는 전설의 창입니다.", 350));
-            
-            
+            //itemList = new List<Item>();
+            itemList.Add(new Item(1, "수련자의 갑옷", "방어력", 5, "수련에 도움을 주는 갑옷입니다.", 1000));
+            itemList.Add(new Item(2, "무쇠갑옷", "방어력", 9, "무쇠로 만들어져 튼튼한 갑옷입니다.", 350));
+            itemList.Add(new Item(3, "스파르타의 갑옷", "방어력", 15, "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 3500));
+            itemList.Add(new Item(4, "낡은 검", "공격력", 2, "쉽게 볼 수 있는 낡은 검 입니다.", 600));
+            itemList.Add(new Item(5, "청동 도끼", "공격력", 5, "어디선가 사용됐던거 같은 도끼입니다.", 1500));
+            itemList.Add(new Item(6, "스파르타의 창", "공격력", 7, "스파르타의 전사들이 사용했다는 전설의 창입니다.", 350));
+
+
             village();
             
         }
@@ -284,7 +284,10 @@ namespace spartaDungeon
                     {
                         Console.WriteLine("구매완료");
                         gold -= itemList[num].price;
-                        //Console.WriteLine(" - {0}. {1} | {2} +{3} | {4} | 구매완료", itemList[num].idx, itemList[num].name, itemList[num].type, itemList[num].value, itemList[num].options);
+                        // 인벤토리로 아이템 이동
+                        // 구매한 아이템 구매완료로 변경
+                        // 재구매를 방지하기 위해 카운트 0으로 변경
+                        itemList[num].count = 0;
                         Console.WriteLine("0. 나가기");
 
                         while(true)
@@ -304,6 +307,26 @@ namespace spartaDungeon
                             }
                         }
                         
+                    }
+                    else if(itemList[num].count == 0)
+                    {
+                        Console.WriteLine("이미 구매한 상품입니다.");
+                        while (true)
+                        {
+                            Console.WriteLine("원하시는 행동을 입력해주세요.");
+                            Console.Write(">> ");
+
+                            input = int.Parse(Console.ReadLine());
+
+                            if (input == 0)
+                            {
+                                store();
+                            }
+                            else
+                            {
+                                Console.WriteLine("잘못된 입력입니다.");
+                            }
+                        }
                     }
                     else
                     {
