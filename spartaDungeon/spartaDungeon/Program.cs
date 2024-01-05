@@ -53,6 +53,7 @@ namespace spartaDungeon
 
         public class Item
         {
+            public string mount;
             public int idx;
             public string name;
             public int count;
@@ -61,8 +62,9 @@ namespace spartaDungeon
             public string options;
             public string price;
 
-            public Item(int idx, string name, string type, int value, string options, string price)
+            public Item(string mount,int idx, string name, string type, int value, string options, string price)
             {
+                this.mount = mount;
                 this.idx = idx;
                 this.name = name;
                 this.count = 1;
@@ -74,6 +76,7 @@ namespace spartaDungeon
 
             public Item(Item item)
             {
+                this.mount = item.mount;
                 this.idx = item.idx;
                 this.name = item.name;
                 count = 1;
@@ -90,12 +93,12 @@ namespace spartaDungeon
             name = Console.ReadLine();
 
             //itemList = new List<Item>();
-            itemList.Add(new Item(1, "수련자의 갑옷", "방어력", 5, "수련에 도움을 주는 갑옷입니다.", "1000"));
-            itemList.Add(new Item(2, "무쇠갑옷", "방어력", 9, "무쇠로 만들어져 튼튼한 갑옷입니다.", "350"));
-            itemList.Add(new Item(3, "스파르타의 갑옷", "방어력", 15, "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", "3500"));
-            itemList.Add(new Item(4, "낡은 검", "공격력", 2, "쉽게 볼 수 있는 낡은 검 입니다.", "600"));
-            itemList.Add(new Item(5, "청동 도끼", "공격력", 5, "어디선가 사용됐던거 같은 도끼입니다.", "1500"));
-            itemList.Add(new Item(6, "스파르타의 창", "공격력", 7, "스파르타의 전사들이 사용했다는 전설의 창입니다.", "350"));
+            itemList.Add(new Item("", 1, "수련자의 갑옷", "방어력", 5, "수련에 도움을 주는 갑옷입니다.", "1000"));
+            itemList.Add(new Item("", 2, "무쇠갑옷", "방어력", 9, "무쇠로 만들어져 튼튼한 갑옷입니다.", "350"));
+            itemList.Add(new Item("", 3, "스파르타의 갑옷", "방어력", 15, "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", "3500"));
+            itemList.Add(new Item("", 4, "낡은 검", "공격력", 2, "쉽게 볼 수 있는 낡은 검 입니다.", "600"));
+            itemList.Add(new Item("", 5, "청동 도끼", "공격력", 5, "어디선가 사용됐던거 같은 도끼입니다.", "1500"));
+            itemList.Add(new Item("", 6, "스파르타의 창", "공격력", 7, "스파르타의 전사들이 사용했다는 전설의 창입니다.", "350"));
 
 
             village();
@@ -183,7 +186,7 @@ namespace spartaDungeon
             Console.WriteLine("[아이템 목록]");
             foreach (Item item in invenList)
             {
-                Console.WriteLine(" - {0} | {1} +{2} | {3}", item.name, item.type, item.value, item.options);
+                Console.WriteLine(" - {0} {1} | {2} +{3} | {4}", item.mount, item.name, item.type, item.value, item.options);
             }
             Console.WriteLine("1. 장착 관리");
             Console.WriteLine("0. 나가기");
@@ -224,7 +227,7 @@ namespace spartaDungeon
             
             foreach (Item item in invenList)
             {
-                Console.WriteLine(" - {0}. {1} | {2} +{3} | {4}", listIdx++, item.name, item.type, item.value, item.options);
+                Console.WriteLine(" - {0}. {1} {2} | {3} +{4} | {5}", listIdx++, item.mount, item.name, item.type, item.value, item.options);
             }
 
             Console.WriteLine("1. 장착하기");
@@ -253,15 +256,35 @@ namespace spartaDungeon
 
                     if (invenNum == (num + 1))
                     {
-                        if (invenList[num].type == "공격력")
+                        if(invenList[num].mount == "")
                         {
-                            Console.WriteLine("무기가 장착되었습니다.");
-                            attack += invenList[num].value;
+                            if (invenList[num].type == "공격력")
+                            {
+                                Console.WriteLine("무기가 장착되었습니다.");
+                                attack += invenList[num].value;
+                                invenList[num].mount = "[E]";
+                            }
+                            else if (invenList[num].type == "방어력")
+                            {
+                                Console.WriteLine("방어구가 장착되었습니다.");
+                                defense += invenList[num].value;
+                                invenList[num].mount = "[E]";
+                            }
                         }
-                        else if (invenList[num].type == "방어력")
+                        else if(invenList[num].mount == "[E]")
                         {
-                            Console.WriteLine("방어구가 장착되었습니다.");
-                            defense += invenList[num].value;
+                            if (invenList[num].type == "공격력")
+                            {
+                                Console.WriteLine("무기가 해제되었습니다.");
+                                attack -= invenList[num].value;
+                                invenList[num].mount = "";
+                            }
+                            else if (invenList[num].type == "방어력")
+                            {
+                                Console.WriteLine("방어구가 해제되었습니다.");
+                                defense -= invenList[num].value;
+                                invenList[num].mount = "";
+                            }
                         }
                         while (true)
                         {   
