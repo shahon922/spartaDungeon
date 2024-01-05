@@ -233,7 +233,7 @@ namespace spartaDungeon
 
             if(input == 1)
             {
-                BuyItem();
+                BuyItem(itemList);
             }
 
             else
@@ -243,7 +243,7 @@ namespace spartaDungeon
             }
         }
 
-        static void BuyItem()
+        static void BuyItem(List<Item> itemList)
         {
             Console.Clear();
             Console.WriteLine("상점");
@@ -270,50 +270,26 @@ namespace spartaDungeon
 
             if (input == 1)
             {
-                foreach (Item item in itemList)
+                Console.WriteLine("구매하고 싶은 번호를 입력하세요");
+                Console.Write(">> ");
+
+                int listNum = int.Parse(Console.ReadLine());
+
+                int num = itemList.FindIndex(a => a.idx == listNum);
+
+                if(listNum == (num+1))
                 {
-
-                    Console.WriteLine("구매하고 싶은 번호를 입력하세요");
-                    Console.Write(">> ");
-
-                    int listNum = int.Parse(Console.ReadLine());
-
-                    int num = itemList.FindIndex(a => a.idx == listNum);
-                    //Console.WriteLine(num);
-
-                    if (listNum == (num+1)) // 배열의 수가 0부터 시작이라 1을 더해줌으로 같아질 수 있을 거라 생각했습니다...
+                    //Console.WriteLine(itemList[num]);
+                    if (gold >= itemList[num].price)
                     {
-                        if (gold >= item.price)
-                        {
-                            Console.WriteLine(item.name);
-                            // 구매완료창 출력
-                            Console.WriteLine("구매가 완료되었습니다.");
-                            // 갖고 있는 gold에서 item.price만큼 빼기
-                            gold -= item.price;
-                            // 카운트를 0으로 변경
-                            item.count = 0;
-                            // 인벤토리로 이동
-                            // price가 구매완료로 변경
-                            store();
-                        }
-                        else if (item.count == 0)
-                        {
-                            // 만약 갖고 있는 거라면 구매했었다는 창 출력
-                            Console.WriteLine("이미 구매한 아이템입니다.");
-                            store();
-                        }
-                        else
-                        {
-                            Console.WriteLine(item.name);
-                            Console.WriteLine("Gold가 부족합니다.");
-                            store();
-                        }
+                        Console.WriteLine("구매완료");
+                        gold -= itemList[num].price;
                     }
                     else
                     {
-                        Console.WriteLine("잘못된 입력입니다.");
-                        store();
+                        Console.WriteLine("Gold가 부족합니다.");
                     }
+
                 }
 
             }
@@ -324,11 +300,12 @@ namespace spartaDungeon
             else
             {
                 Console.WriteLine("잘못된 입력입니다.");
-                BuyItem();
+                
             }
 
         }
-
+        
+    
 
     }
 }
