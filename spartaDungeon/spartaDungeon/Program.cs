@@ -17,7 +17,35 @@ namespace spartaDungeon
         //static int idx = 0;
         static List<Item> itemList = new List<Item>();
 
+        /*public class Player //캐릭터 클래스
+        {
+            public int lv;
+            public string nickName;
+            public int at;
+            public int df;
+            public int hp;
+            public int gold;
 
+            public Player(string nickName,int at, int df, int hp, int gold)
+            { 
+                this.lv = 1;
+                this.nickName = nickName;
+                this.at = at;
+                this.df = df;
+                this.hp = hp;
+                this.gold = gold;
+            }
+
+            public Player(Player player)
+            {
+                this.lv= player.lv;
+                this.nickName = player.nickName;
+                this.at = player.at;
+                this.df = player.df;
+                this.hp = player.hp;
+                this.gold = player.gold;
+            }
+        }*/
 
 
         public class Item
@@ -73,300 +101,316 @@ namespace spartaDungeon
 
         static void village()
         {
-            Console.Clear();
-            Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
-            Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
-
-            Console.WriteLine();
-
-            Console.WriteLine("1. 상태 보기");
-            Console.WriteLine("2. 인벤토리");
-            Console.WriteLine("3. 상점");
-
-            Console.WriteLine();
-
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">> ");
-            int input = int.Parse(Console.ReadLine());
-
-            if (input == 1)
+            while (true)
             {
-                charater();
-            }
-            else if (input == 2)
-            {
-                inventory();
-            }
-            else if (input == 3)
-            {
-                store();
-            }
-            else
-            {
-                Console.WriteLine("잘못된 입력입니다.");
+                Console.Clear();
+                Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
+                Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
+
+                Console.WriteLine();
+
+                Console.WriteLine("1. 상태 보기");
+                Console.WriteLine("2. 인벤토리");
+                Console.WriteLine("3. 상점");
+
+                Console.WriteLine();
+
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.Write(">> ");
+                int input = int.Parse(Console.ReadLine());
+
+                if (input == 1)
+                {
+                    charater();
+                }
+                else if (input == 2)
+                {
+                    inventory();
+                }
+                else if (input == 3)
+                {
+                    store();
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+                }
             }
         }
 
         static void charater()
         {
-            Console.Clear();
-            Console.WriteLine("상태 보기");
-            Console.WriteLine("캐릭터의 정보가 표시됩니다.");
-
-            Console.WriteLine("Lv. {0:D2}", level) ;
-            Console.WriteLine("Chad : {0} ( 전사 )", name);
-            Console.WriteLine("공격력 : {0}", attack);
-            Console.WriteLine("방어력 : {0}", defense);
-            Console.WriteLine("체 력 : {0}", hp);
-            Console.WriteLine("Gold : {0} G", gold);
-
-            Console.WriteLine("0. 나가기");
-
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">> ");
-            int input = int.Parse(Console.ReadLine());
-
-            if (input == 0)
+            while (true)
             {
-                village();
-            }
-            else
-            {
-                Console.WriteLine("잘못된 입력입니다.");
-                charater();
+                Console.Clear();
+                Console.WriteLine("상태 보기");
+                Console.WriteLine("캐릭터의 정보가 표시됩니다.");
+
+                Console.WriteLine("Lv. {0:D2}", level);
+                Console.WriteLine("Chad : {0} ( 전사 )", name);
+                Console.WriteLine("공격력 : {0}", attack);
+                Console.WriteLine("방어력 : {0}", defense);
+                Console.WriteLine("체 력 : {0}", hp);
+                Console.WriteLine("Gold : {0} G", gold);
+
+                Console.WriteLine("0. 나가기");
+
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.Write(">> ");
+                int input = int.Parse(Console.ReadLine());
+
+                if (input == 0)
+                {
+                    village();
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+
+                }
             }
 
         }
 
         static void inventory()
         {
-            Console.Clear();
-            Console.WriteLine("인벤토리");
-            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("인벤토리");
+                Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
 
-            Console.WriteLine("[아이템 목록]");
-            
-            Console.WriteLine("1. 장착 관리");
-            Console.WriteLine("0. 나가기");
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">> ");
-            int input = int.Parse(Console.ReadLine());
+                Console.WriteLine("[아이템 목록]");
 
-            if (input == 0)
-            {
-                village();
-            }
-            else if (input == 1)
-            {
-                mounting();
-            }
-            else
-            {
-                Console.WriteLine("잘못된 입력입니다.");
-                inventory();
+                Console.WriteLine("1. 장착 관리");
+                Console.WriteLine("0. 나가기");
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.Write(">> ");
+                int input = int.Parse(Console.ReadLine());
+
+                if (input == 0)
+                {
+                    village();
+                }
+                else if (input == 1)
+                {
+                    mounting();
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+
+                }
             }
 
         }
 
         static void mounting()
         {
-            Console.Clear();
-            Console.WriteLine("인벤토리 - 장착 관리");
-            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
-
-            Console.WriteLine("[아이템 목록]");
-       
-
-            // 상점에서 인벤토리로 넘김받음
-            // input으로 받은 번호와 idx의 번호 비교
-            // item.type의 string을 비교해서 능력치 추가
-            // 같으면 [E] 출력 / [E]가 있을 때 누르면 [E] 사라짐
-            // charate에 능력치 추가/해제
-
-            Console.WriteLine("0. 나가기");
-
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">> ");
-            int input = int.Parse(Console.ReadLine());
-
-            if (input == 0)
+            while(true)
             {
-                inventory();
-            }
-            else
-            {
-                Console.WriteLine("잘못된 입력입니다.");
-                Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine("인벤토리 - 장착 관리");
+                Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
+
+                Console.WriteLine("[아이템 목록]");
+
+
+                // 상점에서 인벤토리로 넘김받음
+                // input으로 받은 번호와 idx의 번호 비교
+                // item.type의 string을 비교해서 능력치 추가
+                // 같으면 [E] 출력 / [E]가 있을 때 누르면 [E] 사라짐
+                // charate에 능력치 추가/해제
+
+                Console.WriteLine("0. 나가기");
+
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.Write(">> ");
+                int input = int.Parse(Console.ReadLine());
+
+                if (input == 0)
+                {
+                    inventory();
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.ReadLine();
+                }
             }
         }
 
 
-
         static void store()
         {
-            Console.Clear();
-            Console.WriteLine("상점");
-            Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
-
-            Console.WriteLine("[보유 골드]");
-            Console.WriteLine("{0} G", gold);
-            Console.WriteLine("[아이템 목록]");
-            
-
-            foreach (Item item in itemList)
+            while(true)
             {
-                Console.WriteLine(" - {0} | {1} +{2} | {3} | {4} G", item.name, item.type, item.value, item.options, item.price);
-            }
+                Console.Clear();
+                Console.WriteLine("상점");
+                Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
 
-            Console.WriteLine("1. 아이템 구매");
-            Console.WriteLine("0. 나가기");
+                Console.WriteLine("[보유 골드]");
+                Console.WriteLine("{0} G", gold);
+                Console.WriteLine("[아이템 목록]");
 
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">> ");
 
-            int input = int.Parse(Console.ReadLine());
+                foreach (Item item in itemList)
+                {
+                    Console.WriteLine(" - {0} | {1} +{2} | {3} | {4} G", item.name, item.type, item.value, item.options, item.price);
+                }
 
-            if (input == 0)
-            {
-                village();
-            }
+                Console.WriteLine("1. 아이템 구매");
+                Console.WriteLine("0. 나가기");
 
-            if(input == 1)
-            {
-                BuyItem(itemList);
-            }
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.Write(">> ");
 
-            else
-            {
-                Console.WriteLine("잘못된 입력입니다.");
-                Console.ReadLine();
+                int input = int.Parse(Console.ReadLine());
+
+                if (input == 0)
+                {
+                    village();
+                }
+
+                if (input == 1)
+                {
+                    BuyItem(itemList);
+                }
+
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+
+                }
             }
         }
 
         static void BuyItem(List<Item> itemList)
         {
-            Console.Clear();
-            Console.WriteLine("상점");
-            Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
-
-            Console.WriteLine("[보유 골드]");
-            Console.WriteLine("{0} G", gold);
-            Console.WriteLine("[아이템 목록]");
-
-            foreach (Item item in itemList)
+            while(true)
             {
-                Console.WriteLine(" - {0}. {1} | {2} +{3} | {4} | {5} G", item.idx, item.name, item.type, item.value, item.options, item.price);
+                Console.Clear();
+                Console.WriteLine("상점");
+                Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
 
-            }
+                Console.WriteLine("[보유 골드]");
+                Console.WriteLine("{0} G", gold);
+                Console.WriteLine("[아이템 목록]");
 
-
-            Console.WriteLine("1. 구매");
-            Console.WriteLine("0. 나가기");
-
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">> ");
-
-            int input = int.Parse(Console.ReadLine());
-
-            if (input == 1)
-            {
-                Console.WriteLine("구매하고 싶은 번호를 입력하세요");
-                Console.Write(">> ");
-
-                int listNum = int.Parse(Console.ReadLine());
-
-                int num = itemList.FindIndex(a => a.idx == listNum);
-
-                if(listNum == (num+1))
+                foreach (Item item in itemList)
                 {
-                    //Console.WriteLine(itemList[num]);
-                    if (gold >= itemList[num].price)
-                    {
-                        Console.WriteLine("구매완료");
-                        gold -= itemList[num].price;
-                        // 인벤토리로 아이템 이동
-                        // 구매한 아이템 구매완료로 변경
-                        // 재구매를 방지하기 위해 카운트 0으로 변경
-                        itemList[num].count = 0;
-                        Console.WriteLine("0. 나가기");
-
-                        while(true)
-                        {
-                            Console.WriteLine("원하시는 행동을 입력해주세요.");
-                            Console.Write(">> ");
-
-                            input = int.Parse(Console.ReadLine());
-
-                            if (input == 0)
-                            {
-                                store();
-                            }
-                            else
-                            {
-                               Console.WriteLine("잘못된 입력입니다.");
-                            }
-                        }
-                        
-                    }
-                    else if(itemList[num].count == 0)
-                    {
-                        Console.WriteLine("이미 구매한 상품입니다.");
-                        while (true)
-                        {
-                            Console.WriteLine("원하시는 행동을 입력해주세요.");
-                            Console.Write(">> ");
-
-                            input = int.Parse(Console.ReadLine());
-
-                            if (input == 0)
-                            {
-                                store();
-                            }
-                            else
-                            {
-                                Console.WriteLine("잘못된 입력입니다.");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Gold가 부족합니다.");
-                        Console.WriteLine("0. 나가기");
-
-                        while (true)
-                        {
-                            Console.WriteLine("원하시는 행동을 입력해주세요.");
-                            Console.Write(">> ");
-
-                            input = int.Parse(Console.ReadLine());
-
-                            if (input == 0)
-                            {
-                                store();
-                            }
-                            else
-                            {
-                                Console.WriteLine("잘못된 입력입니다.");
-                            }
-                        }
-                    }
+                    Console.WriteLine(" - {0}. {1} | {2} +{3} | {4} | {5} G", item.idx, item.name, item.type, item.value, item.options, item.price);
 
                 }
 
-            }
-            else if (input == 0)
-            {
-                store();
-            }
-            else
-            {
-                Console.WriteLine("잘못된 입력입니다.");
-                
+
+                Console.WriteLine("1. 구매");
+                Console.WriteLine("0. 나가기");
+
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.Write(">> ");
+
+                int input = int.Parse(Console.ReadLine());
+
+                if (input == 1)
+                {
+                    Console.WriteLine("구매하고 싶은 번호를 입력하세요");
+                    Console.Write(">> ");
+
+                    int listNum = int.Parse(Console.ReadLine());
+
+                    int num = itemList.FindIndex(a => a.idx == listNum);
+
+                    if (listNum == (num + 1))
+                    {
+                        //Console.WriteLine(itemList[num]);
+                        if (gold >= itemList[num].price)
+                        {
+                            Console.WriteLine("구매완료");
+                            gold -= itemList[num].price;
+                            // 인벤토리로 아이템 이동
+                            // 구매한 아이템 구매완료로 변경
+                            // 아이템을 삭재하고 그 배열에 새로추가
+                            // 재구매를 방지하기 위해 카운트 0으로 변경
+                            itemList[num].count = 0;
+                            Console.WriteLine("0. 나가기");
+
+                            while (true)
+                            {
+                                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                                Console.Write(">> ");
+
+                                input = int.Parse(Console.ReadLine());
+
+                                if (input == 0)
+                                {
+                                    store();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("잘못된 입력입니다.");
+                                }
+                            }
+
+                        }
+                        else if (itemList[num].count == 0)
+                        {
+                            Console.WriteLine("이미 구매한 상품입니다.");
+                            while (true)
+                            {
+                                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                                Console.Write(">> ");
+
+                                input = int.Parse(Console.ReadLine());
+
+                                if (input == 0)
+                                {
+                                    store();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("잘못된 입력입니다.");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Gold가 부족합니다.");
+                            Console.WriteLine("0. 나가기");
+
+                            while (true)
+                            {
+                                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                                Console.Write(">> ");
+
+                                input = int.Parse(Console.ReadLine());
+
+                                if (input == 0)
+                                {
+                                    store();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("잘못된 입력입니다.");
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+                else if (input == 0)
+                {
+                    store();
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+
+                }
             }
 
         }
-        
-    
 
     }
 }
