@@ -16,6 +16,7 @@ namespace spartaDungeon
         static int gold = 1500;
         //static int idx = 0;
         static List<Item> itemList = new List<Item>();
+        static List<Item> invenList = new List<Item>();
         
 
         /*public class Player //캐릭터 클래스
@@ -179,7 +180,7 @@ namespace spartaDungeon
             Console.WriteLine("인벤토리");
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
             Console.WriteLine("[아이템 목록]");
-            foreach (Item item in itemList)
+            foreach (Item item in invenList)
             {
                 Console.WriteLine(" - {0} | {1} +{2} | {3}", item.name, item.type, item.value, item.options);
             }
@@ -198,7 +199,7 @@ namespace spartaDungeon
                 }
                 else if (input == 1)
                 {
-                    mounting();
+                    mounting(invenList);
                 }
                 else
                 {
@@ -209,7 +210,7 @@ namespace spartaDungeon
 
         }
 
-        static void mounting()
+        static void mounting(List<Item> invenList)
         {
 
             Console.Clear();
@@ -218,17 +219,12 @@ namespace spartaDungeon
 
             Console.WriteLine("[아이템 목록]");
 
-            foreach (Item item in itemList)
+            foreach (Item item in invenList)
             {
-                Console.WriteLine(" - {0} | {1} +{2} | {3}", item.name, item.type, item.value, item.options);
+                Console.WriteLine(" - {0}. {1} | {2} +{3} | {4}", item.idx, item.name, item.type, item.value, item.options);
             }
 
-            // 상점에서 인벤토리로 넘김받음
-            // input으로 받은 번호와 idx의 번호 비교
-            // item.type의 string을 비교해서 능력치 추가
-            // 같으면 [E] 출력 / [E]가 있을 때 누르면 [E] 사라짐
-            // charate에 능력치 추가/해제
-
+            Console.WriteLine("1. 장착하기");
             Console.WriteLine("0. 나가기");
             while (true)
             {
@@ -239,6 +235,50 @@ namespace spartaDungeon
                 if (input == 0)
                 {
                     inventory();
+                }
+                else if(input == 1)
+                {
+                    // 상점에서 인벤토리로 넘김받음
+                    // input으로 받은 번호와 idx의 번호 비교
+                    // item.type의 string을 비교해서 능력치 추가
+                    // 같으면 [E] 출력 / [E]가 있을 때 누르면 [E] 사라짐
+                    // charate에 능력치 추가/해제
+                    Console.WriteLine("장착할 아이템의 번호를 입력하세요");
+                    Console.Write(">> ");
+                    int invenNum = int.Parse(Console.ReadLine());
+                    int num = itemList.FindIndex(a => a.idx == invenNum);
+
+                    if (invenNum == (num + 1))
+                    {
+                        if (invenList[num].type == "공격력")
+                        {
+                            Console.WriteLine("무기가 장착되었습니다.");
+                            attack += invenList[num].value;
+                        }
+                        else if (invenList[num].type == "방어력")
+                        {
+                            Console.WriteLine("방어구가 장착되었습니다.");
+                            defense += invenList[num].value;
+                        }
+                        while (true)
+                        {   
+                            Console.WriteLine("0. 나가기");
+                            Console.WriteLine("원하시는 행동을 입력해주세요.");
+                            Console.Write(">> ");
+
+                            input = int.Parse(Console.ReadLine());
+
+                            if (input == 0)
+                            {
+                                inventory();
+                            }
+                            else
+                            {
+                                Console.WriteLine("잘못된 입력입니다.");
+                            }
+                        }
+                    }
+                    
                 }
                 else
                 {
@@ -328,9 +368,9 @@ namespace spartaDungeon
 
                     int listNum = int.Parse(Console.ReadLine());
 
-                    int num = itemList.FindIndex(a => a.idx == listNum);
+                    int num = itemList.FindIndex(a => a.idx == listNum); // itemList에 있는 idx와 listNum이 같은 수가 있는 곳을 알려줌
                     int priceInt = int.Parse(itemList[num].price);
-                    Item selectedItem = itemList[num];
+                    
 
                     if (listNum == (num + 1))
                     {
@@ -339,8 +379,8 @@ namespace spartaDungeon
                         {
                             Console.WriteLine("구매완료");
                             gold -= priceInt;
-                            // 인벤토리로 아이템 이동
-                            
+                            // 인벤토리로 아이템 이동 - 인벤토리 리스트를 만들어 사용
+                            invenList.Add(itemList[num]);
                             // 구매한 아이템 구매완료로 변경
                             itemList[num].price = "구매완료";
                             // 재구매를 방지하기 위해 카운트 0으로 변경
