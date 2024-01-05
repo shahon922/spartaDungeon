@@ -1,5 +1,6 @@
 ﻿
 
+using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using static spartaDungeon.Program;
@@ -150,8 +151,8 @@ namespace spartaDungeon
 
                 Console.WriteLine("Lv. {0:D2}", level);
                 Console.WriteLine("Chad : {0} ( 전사 )", name);
-                Console.WriteLine("공격력 : {0}", attack);
-                Console.WriteLine("방어력 : {0}", defense);
+                Console.WriteLine("공격력 : {0} (+{1})", attack);
+                Console.WriteLine("방어력 : {0} (+{1})", defense);
                 Console.WriteLine("체 력 : {0}", hp);
                 Console.WriteLine("Gold : {0} G", gold);
 
@@ -219,9 +220,11 @@ namespace spartaDungeon
 
             Console.WriteLine("[아이템 목록]");
 
+            int listIdx = 1;
+            
             foreach (Item item in invenList)
             {
-                Console.WriteLine(" - {0}. {1} | {2} +{3} | {4}", item.idx, item.name, item.type, item.value, item.options);
+                Console.WriteLine(" - {0}. {1} | {2} +{3} | {4}", listIdx++, item.name, item.type, item.value, item.options);
             }
 
             Console.WriteLine("1. 장착하기");
@@ -283,7 +286,6 @@ namespace spartaDungeon
                 else
                 {
                     Console.WriteLine("잘못된 입력입니다.");
-                    Console.ReadLine();
                 }
             }
         }
