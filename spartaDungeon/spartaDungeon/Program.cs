@@ -284,10 +284,48 @@ namespace spartaDungeon
                     {
                         Console.WriteLine("구매완료");
                         gold -= itemList[num].price;
+                        //Console.WriteLine(" - {0}. {1} | {2} +{3} | {4} | 구매완료", itemList[num].idx, itemList[num].name, itemList[num].type, itemList[num].value, itemList[num].options);
+                        Console.WriteLine("0. 나가기");
+
+                        while(true)
+                        {
+                            Console.WriteLine("원하시는 행동을 입력해주세요.");
+                            Console.Write(">> ");
+
+                            input = int.Parse(Console.ReadLine());
+
+                            if (input == 0)
+                            {
+                                store();
+                            }
+                            else
+                            {
+                               Console.WriteLine("잘못된 입력입니다.");
+                            }
+                        }
+                        
                     }
                     else
                     {
                         Console.WriteLine("Gold가 부족합니다.");
+                        Console.WriteLine("0. 나가기");
+
+                        while (true)
+                        {
+                            Console.WriteLine("원하시는 행동을 입력해주세요.");
+                            Console.Write(">> ");
+
+                            input = int.Parse(Console.ReadLine());
+
+                            if (input == 0)
+                            {
+                                store();
+                            }
+                            else
+                            {
+                                Console.WriteLine("잘못된 입력입니다.");
+                            }
+                        }
                     }
 
                 }
