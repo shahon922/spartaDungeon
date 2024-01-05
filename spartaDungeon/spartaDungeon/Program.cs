@@ -112,6 +112,7 @@ namespace spartaDungeon
                 Console.Clear();
                 Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
                 Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
+                //Console.WriteLine("상태창에 (+능력치)추가하는 기능을 구현하지 못했습니다.");
 
                 Console.WriteLine();
 
@@ -248,7 +249,7 @@ namespace spartaDungeon
                     // input으로 받은 번호와 idx의 번호 비교
                     // item.type의 string을 비교해서 능력치 추가
                     // 같으면 [E] 출력 / [E]가 있을 때 누르면 [E] 사라짐
-                    // charate에 능력치 추가/해제
+                    // charate에 능력치 증가/감소
                     Console.WriteLine("장착할 아이템의 번호를 입력하세요");
                     Console.Write(">> ");
                     int invenNum = int.Parse(Console.ReadLine());
